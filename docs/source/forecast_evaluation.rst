@@ -33,7 +33,7 @@ In addition to forecasted probabilities, three datasets are required for forecas
    When downloading historical atmospheric characteristics, the date should correspond to the beginning of the forecast window (i.e. day 19 or day 26) and not the forecast initialisation date (day 1). Additionally, participants will only be able to download weekly observations commencing on a Monday.
 
 Weekly observations
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 The **retrieve_weekly_obs** function downloads the requested set of observations that are used for forecast evaluation.
 
 .. code-block:: python
@@ -68,7 +68,7 @@ Downloaded observations follow this naming pattern:
 where **weekly_statistic** is either 'WEEKLYMEAN' (for temperature and pressure) or 'WEEKLYSUM' (for precipitation). 
 
 Climatological quintile boundaries
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The *retrieve_20yr_quintile_clim* function downloads climatological quintile boundaries.
 
@@ -93,7 +93,7 @@ The **retrieve_20yr_quintile_clim** function returns a dataset containing climat
    Climatological quintile boundaries are available at a daily resolution from 11th January 1999 to present day plus eight months. 
 
 Land fraction data
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 The *retrieve_land_sea_mask* function retrieves land fraction values from ECMWF.
 
@@ -117,7 +117,7 @@ This dataset is used to mask oceanic grid points when evaluating temperature and
    Land fraction values are not used when evaluating forecasts of mean sea level pressure. 
 
 Example: Retrieving Required Datasets
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -143,7 +143,7 @@ The **forecast evaluation** module provides two key functions for computing Rank
 - **work_out_RPSS**: Computes the global area-weighted ranked probability skill score, benchmarking forecasts against climatology.
 
 Compute observed probabilities
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The *conditional_obs_probs* function determines observed probabilities within a given set of climatological quintile boundaries. The probability is 1 when an observation falls within the specified boundaries.
 
 .. code-block:: python
@@ -154,7 +154,7 @@ The *conditional_obs_probs* function determines observed probabilities within a 
 - **quintile_bounds** (*xarray.DataArray*): Climatological quintile boundaries.
 
 Calculate Ranked Probability Skill Score
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The **work_out_RPSS** function computes the global area-weighted RPSS, measuring forecast accuracy against climatology. 
 
 .. code-block:: python
@@ -187,7 +187,7 @@ The **work_out_RPSS** function executes the following tasks:
 The final output is the same RPSS displayed on the AI Weather Quest website.
 
 Calculate regional skill scores
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In addition to globally-averaged metrics, regional RPSSs can be computed using the function **apply_region_mask**. This allows skill to be evaluated over user-defined geographic domains. 
 
 Regional masking is applied by specifying a latitude–longitude bounding box:
@@ -210,7 +210,7 @@ The RPSS is computed as:
 A complete example demonstrating this workflow is provided below.
 
 Example evaluating a single forecast
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Continuing from the example above, the following code illustrates the evaluation of temperature forecasts for the week commencing 19th May 2025. 
 
@@ -225,7 +225,7 @@ Continuing from the example above, the following code illustrates the evaluation
    global_RPSS = forecast_evaluation.work_out_RPSS(submitted_forecast,obs_pbs,'tas',land_sea_mask)
 
 Example computing period-aggregated scores
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Participants can compute period-aggregated scores by aggregating forecasts over multiple initialization dates within a competitive period. This requires retrieving a list of forecast initialization dates.
 
